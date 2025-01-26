@@ -7,6 +7,7 @@ local interface GameState
     pointerDown: function(self: self)
     pointerUp: function(self: self)
     websocketMessage: function(self: self, message: string, changeState: function(GameState))
+    restart: function(self: self, key: boolean)
 end
 
 return GameState

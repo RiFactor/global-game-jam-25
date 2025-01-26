@@ -4,7 +4,7 @@ local Buttons = require("game.buttons")
 
 
 local record Game
-    currentState: GameState
+    currentState: GameState -- set EndState?
     buttons: Buttons
     keyStates: {string:boolean}
     socketOpen: boolean
@@ -35,12 +35,13 @@ function Game.init()
 end
 
 function Game.onButton(x: number, y: number)
-    local move = Game.buttons:onClicked(x, y)
-    if (move == -1) then
-        Game.keyPress("touchLeft")
-    elseif (move == 1) then
-        Game.keyPress("touchRight")
-    end
+    -- local move = Game.buttons:onClicked(x, y, true)
+    -- if (move == 3) then
+    --     print("end state click")
+    -- end
+    -- if (move != 3) then
+    --     Game.keyPress("touchRight")
+    -- end
 end
 
 
@@ -57,6 +58,9 @@ function EndScreen:step(numberOfPlayers: number, keyStates: {string:boolean}, so
     local newKeyStates = {} -- boolean required
     setmetatable(newKeyStates, {__index = keyStates})
     -- show score
+    print("End state")
+    -- changeState(startState)
+    -- show button here?
 end
 
 
