@@ -33,4 +33,8 @@ function Buttons:onClicked(x: number, y: number): number
     return 0
 end
 
+function Buttons:onTouch(): number
+    return 5
+end
+
 return Buttons

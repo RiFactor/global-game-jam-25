@@ -23,7 +23,7 @@ function EndBackground.new(): EndBackground
     for x=0, (config.displayWidth//TILE_SIZE) do
         for y=0, (config.displayHeight//TILE_SIZE) do
             local tileIndex = math.random(0,3) -- ?
-            instance.canvas.drawImage("duck.png", tileIndex*TILE_SIZE, 0, TILE_SIZE, TILE_SIZE, x*TILE_SIZE, y*TILE_SIZE, TILE_SIZE, TILE_SIZE)
+            instance.canvas.drawImage("duck.png", 0, 0, 64, 64, x*64, y*64, 64, 64)
         end -- or different image
     end
     return instance

@@ -1,5 +1,21 @@
 local type GameState = require("game.gamestate")
 local EndBackground = require("game.endbackground")
+local Buttons = require("game.buttons")
+
+
+local record Game
+    currentState: GameState
+    buttons: Buttons
+    keyStates: {string:boolean}
+    socketOpen: boolean
+    step: function(dt: number)
+    draw: function()
+    keyUp: function(key: string)
+    keyDown: function(key: string)
+    keyPress: function(key: string)
+    pointerDown: function()
+    pointerUp: function()
+end
 
 local record EndScreen is GameState
     background: EndBackground
@@ -8,6 +24,24 @@ end
 local EndScreenMetatable: metatable<EndScreen> = {
     __index = EndScreen
 }
+
+Game.keyStates = {}
+Game.socketOpen = false
+
+function Game.init()
+    -- Socket.open(subprotocol)
+    -- Game.currentState = LoadingState
+    Game.buttons = Buttons.new()
+end
+
+function Game.onButton(x: number, y: number)
+    local move = Game.buttons:onClicked(x, y)
+    if (move == -1) then
+        Game.keyPress("touchLeft")
+    elseif (move == 1) then
+        Game.keyPress("touchRight")
+    end
+end
 
 
 function EndScreen.new() : EndScreen
@@ -24,6 +58,7 @@ function EndScreen:step(numberOfPlayers: number, keyStates: {string:boolean}, so
     setmetatable(newKeyStates, {__index = keyStates})
     -- show score
 end
+
 
 
 function EndScreen:draw()
